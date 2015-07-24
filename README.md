@@ -1,8 +1,6 @@
 # angular-bootcards-playground 
 A quick sample angular 1.4 site with bootcards (bootcards.org) styling for desktop, iPad, iPhone, Android.  Use Google Chrome emulator to see the views for iPad, iPhone, Android
 
-Sample site - http://angular-bootcards.azurewebsites.net/
-
 ![image](https://cloud.githubusercontent.com/assets/4294995/8879235/36df4dd0-31fe-11e5-97cc-db5dffa3bf1f.png)
 
 
