@@ -14,6 +14,7 @@
                     success(function (data, status, headers, config) {
                         $scope.posts = data;
                         $scope.selectedPost = {};
+                        $scope.newPost = {};
                     }).
                     error(function (data, status, headers, config) {
                         // log error
@@ -35,10 +36,6 @@
                 $http.post('http://jsonplaceholder.typicode.com/posts', post).
                     success(function (data, status, headers, config) {
                         alert("Post updated...");
-
-                        if (isNew) {
-                            $scope.newPost = {};
-                        }
 
                         //The post is a mock so nothing will update on the server.
                         $scope.refresh();
