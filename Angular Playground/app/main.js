@@ -13,6 +13,7 @@
                 $http.get('http://jsonplaceholder.typicode.com/posts').
                     success(function (data, status, headers, config) {
                         $scope.posts = data;
+                        $scope.selectedPost = {};
                     }).
                     error(function (data, status, headers, config) {
                         // log error
