@@ -61,13 +61,8 @@
                         <div class="search-form">
                             <div class="row">
                                 <div class="col-xs-11">
-                                    <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="Search for..."><span><i class="fa fa-search"></i></span>
-                                        <span class="input-group-btn">
-                                            <a class="btn btn-primary btn-block" href="#">
-                                                Go
-                                            </a>
-                                        </span>
+                                    <div class="form-group">
+                                        <input type="search" ng-model="searchText" class="form-control" placeholder="Search for..."><span><i class="fa fa-search"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +71,8 @@
                     <div class="panel panel-default">
                         <div class="list-group posts">
                             <a class="list-group-item" href="#"
-                               ng-repeat="post in posts"
-                               ng-click="getSelectedData($index)"
+                               ng-repeat="post in posts | filter:searchText"
+                               ng-click="getSelectedData(post.id)"
                                onclick="toggleBasedOnMobile(this, true);">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -104,7 +99,7 @@
                         </a>
 
                         <a class="btn btn-primary pull-right" href="#" data-toggle="modal"
-                           data-target="#editModal">
+                           data-target="#editModal" ng-show="editButtonState === 'enabled'">
                             <i class="fa fa-pencil"></i>
                             Edit
                         </a>

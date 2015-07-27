@@ -7,6 +7,8 @@
             $scope.posts = [];
             $scope.selectedPost = {};
             $scope.newPost = {};
+            $scope.searchText = "";
+            $scope.editButtonState = "disabled";
 
             //Get the data on load and then set the posts object
             $scope.refresh = function () {
@@ -15,6 +17,7 @@
                         $scope.posts = data;
                         $scope.selectedPost = {};
                         $scope.newPost = {};
+                        $scope.editButtonState = "disabled";
                     }).
                     error(function (data, status, headers, config) {
                         // log error
@@ -26,7 +29,13 @@
 
             //Get the data when a post is clicked
             $scope.getSelectedData = function (index) {
-                $scope.selectedPost = $scope.posts[index];
+                for (var i = 0; i < $scope.posts.length; i++) {
+                    if ($scope.posts[i].id == index) {
+                        $scope.selectedPost = $scope.posts[i];
+                        $scope.editButtonState = "enabled";
+                        break;
+                    }
+                }
             }
 
             //Update the data...
