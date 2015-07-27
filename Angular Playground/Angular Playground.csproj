@@ -91,6 +91,8 @@
   <ItemGroup>
     <Content Include="app\app.module.js" />
     <Content Include="app\main.js" />
+    <Content Include="Content\angular-block-ui.min.css" />
+    <Content Include="scripts\angular-block-ui.min.js" />
     <Content Include="Content\bootcards-android-lite.css" />
     <Content Include="Content\bootcards-android-lite.min.css" />
     <Content Include="Content\bootcards-android.css" />
