@@ -3,21 +3,22 @@
     
     angular
         .module('app')
-        .controller('Main', function ($scope, $http) {
-            $scope.posts = [];
-            $scope.selectedPost = {};
-            $scope.newPost = {};
-            $scope.searchText = "";
-            $scope.editButtonState = "disabled";
+        .controller('Main', function ($http) {
+            var vm = this;
+            vm.posts = [];
+            vm.selectedPost = {};
+            vm.newPost = {};
+            vm.searchText = "";
+            vm.editButtonState = "disabled";
 
             //Get the data on load and then set the posts object
-            $scope.refresh = function () {
+            vm.refresh = function () {
                 $http.get('http://jsonplaceholder.typicode.com/posts').
                     success(function (data, status, headers, config) {
-                        $scope.posts = data;
-                        $scope.selectedPost = {};
-                        $scope.newPost = {};
-                        $scope.editButtonState = "disabled";
+                        vm.posts = data;
+                        vm.selectedPost = {};
+                        vm.newPost = {};
+                        vm.editButtonState = "disabled";
                     }).
                     error(function (data, status, headers, config) {
                         // log error
@@ -25,29 +26,29 @@
             };
 
             //Refresh the data.
-            $scope.refresh();
+            vm.refresh();
 
             //Get the data when a post is clicked
-            $scope.getSelectedData = function (index) {
-                for (var i = 0; i < $scope.posts.length; i++) {
-                    if ($scope.posts[i].id == index) {
-                        $scope.selectedPost = $scope.posts[i];
-                        $scope.editButtonState = "enabled";
+            vm.getSelectedData = function (index) {
+                for (var i = 0; i < vm.posts.length; i++) {
+                    if (vm.posts[i].id == index) {
+                        vm.selectedPost = vm.posts[i];
+                        vm.editButtonState = "enabled";
                         break;
                     }
                 }
             }
 
             //Update the data...
-            $scope.updateOrInsertPost = function (isNew) {
-                var post = isNew ? $scope.newPost : $scope.selectedPost;
+            vm.updateOrInsertPost = function (isNew) {
+                var post = isNew ? vm.newPost : vm.selectedPost;
 
                 $http.post('http://jsonplaceholder.typicode.com/posts', post).
                     success(function (data, status, headers, config) {
                         alert("Post updated...");
 
                         //The post is a mock so nothing will update on the server.
-                        $scope.refresh();
+                        vm.refresh();
                     }).
                     error(function (data, status, headers, config) {
                         // log error
