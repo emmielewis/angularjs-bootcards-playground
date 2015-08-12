@@ -909,7 +909,7 @@
     <Content Include="scripts\mobile-detect.js" />
     <Content Include="scripts\mobile-detect.min.js" />
     <Content Include="scripts\respond.js" />
-    <Content Include="testView.html" />
+    <Content Include="views\testView.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
