@@ -3,30 +3,16 @@
     
     angular
         .module('app')
-        .controller('Main', function ($http) {
+        .controller('Main',["$http",
+                     MainCtrl]);
+
+        function MainCtrl ($http) {
             var vm = this;
             vm.posts = [];
             vm.selectedPost = {};
             vm.newPost = {};
             vm.searchText = "";
             vm.editButtonState = "disabled";
-
-            //Get the data on load and then set the posts object
-            vm.refresh = function () {
-                $http.get('http://jsonplaceholder.typicode.com/posts').
-                    success(function (data, status, headers, config) {
-                        vm.posts = data;
-                        vm.selectedPost = {};
-                        vm.newPost = {};
-                        vm.editButtonState = "disabled";
-                    }).
-                    error(function (data, status, headers, config) {
-                        // log error
-                    });
-            };
-
-            //Refresh the data.
-            vm.refresh();
 
             //Get the data when a post is clicked
             vm.getSelectedData = function (index) {
@@ -56,5 +42,20 @@
                     });
             }
 
-        });
+            //Get the data on load and then set the posts object
+            vm.refresh = function () {
+                $http.get('http://jsonplaceholder.typicode.com/posts').
+                    success(function (data, status, headers, config) {
+                        vm.posts = data;
+                        vm.selectedPost = {};
+                        vm.newPost = {};
+                        vm.editButtonState = "disabled";
+                    }).
+                    error(function (data, status, headers, config) {
+                        // log error
+                    });
+            };
+
+            vm.refresh();
+        };
 })();

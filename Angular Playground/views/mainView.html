@@ -1,0 +1,182 @@
+﻿<div class="container bootcards-container" ngcloak>
+    <div class="row">
+        <!-- Fixed navbar -->
+        <div class="col-sm-5 bootcards-list" id="list" data-title="List">
+
+            <div class="panel panel-default" id="coreData">
+                <div class="panel-body">
+                    <div class="search-form">
+                        <div class="row">
+                            <div class="col-xs-11">
+                                <div class="form-group">
+                                    <input type="search" ng-model="searchText" class="form-control" placeholder="Search for..."><span><i class="fa fa-search"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="list-group">
+                        <a class="list-group-item" 
+                           ng-repeat="post in vm.posts | filter:searchText"
+                           ng-click="vm.getSelectedData(post.id)"
+                           onclick="toggleBasedOnMobile(this, true);">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <i class="fa fa-4x fa-quote-left pull-left"></i>
+                                    <h4 class="list-group-item-heading">{{post.title}}</h4>
+                                    <p class="list-group-item-text">{{post.body}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-7 bootcards-cards" id="listDetails" data-title="Details">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left">Post Details</h3>
+
+                    <a class="btn btn-primary pull-right" href="#" data-toggle="modal"
+                       data-target="#addModal">
+                        <i class="fa fa-plus"></i>
+                        Add
+                    </a>
+
+                    <a class="btn btn-primary pull-right" href="#" data-toggle="modal"
+                       data-target="#editModal" ng-show="editButtonState === 'enabled'">
+                        <i class="fa fa-pencil"></i>
+                        Edit
+                    </a>
+                </div>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <p class="list-group-item-text">Title</p>
+                        <h4 class="list-group-item-heading">{{vm.selectedPost.title}}</h4>
+                    </div>
+                    <div class="list-group-item">
+                        <p class="list-group-item-text">Body</p>
+                        <h4 class="list-group-item-heading">{{vm.selectedPost.body}}</h4>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <small>Footer Test</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default active">
+                        <i class="fa fa-2x fa-home"></i>
+                        Home
+                    </a>
+                    <a href="#" class="btn btn-default">
+                        <i class="fa fa-2x fa-building-o"></i>
+                        Companies
+                    </a>
+                    <a href="#" class="btn btn-default">
+                        <i class="fa fa-2x fa-gears"></i>
+                        Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modals-->
+<div class="modal fade in" role="dialog" tabindex="-1" id="editModal" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal">
+
+                <div class="modal-header">
+                    <div class="btn-group pull-left">
+                        <button class="btn btn-primary" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-primary" ng-click="updateOrInsertPost(false)">
+                            Save
+                        </button>
+                    </div>
+
+                    <h3 class="modal-title">Edit Post</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Title</label>
+                        <div class="col-xs-9">
+                            <textarea name="title" class="form-control" ng-model="selectedPost.title" placeholder="Title">{{selectedPost.title}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Body</label>
+                        <div class="col-xs-9">
+                            <textarea name="body" class="form-control" ng-model="selectedPost.body" placeholder="Body">{{selectedPost.body}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    Footer Test
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" role="dialog" tabindex="-1" id="addModal" aria-labelledby="addModal" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <form class="form-horizontal">
+
+                <div class="modal-header">
+                    <div class="btn-group pull-left">
+                        <button class="btn btn-primary" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="submit" class="btn btn-primary" ng-click="updateOrInsertPost(true)">
+                            Save
+                        </button>
+                    </div>
+
+                    <h3 class="modal-title">New Post</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Title</label>
+                        <div class="col-xs-9">
+                            <textarea name="title" class="form-control" ng-model="newPost.title" placeholder="Title">{{newPost.title}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-3 control-label">Body</label>
+                        <div class="col-xs-9">
+                            <textarea name="body" class="form-control" ng-model="newPost.body" placeholder="Body">{{newPost.body}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    Footer Test
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
