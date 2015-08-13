@@ -15,14 +15,8 @@
             vm.editButtonState = "disabled";
 
             //Get the data when a post is clicked
-            vm.getSelectedData = function (index) {
-                for (var i = 0; i < vm.posts.length; i++) {
-                    if (vm.posts[i].id == index) {
-                        vm.selectedPost = vm.posts[i];
-                        vm.editButtonState = "enabled";
-                        break;
-                    }
-                }
+            vm.getSelectedData = function (post) {
+                vm.selectedPost = post;
             }
 
             //Update the data...

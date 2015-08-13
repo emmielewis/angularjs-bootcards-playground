@@ -19,7 +19,7 @@
                     <div class="list-group">
                         <a class="list-group-item" 
                            ng-repeat="post in vm.posts | filter:searchText"
-                           ng-click="vm.getSelectedData(post.id)"
+                           ng-click="vm.getSelectedData(post)"
                            onclick="toggleBasedOnMobile(this, true);">
                             <div class="row">
                                 <div class="col-sm-12">
