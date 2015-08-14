@@ -1,10 +1,11 @@
-﻿(function () {
-    'use strict';
+﻿(function() {
+    "use strict";
 
-    var app = angular.module('app', ['blockUI', 'ngRoute']);
+    var app = angular.module("app", ["blockUI", "ngRoute"]);
 
-    app.config(["$routeProvider",
-        function ($routeProvider) {
+    app.config([
+        "$routeProvider",
+        function($routeProvider) {
             $routeProvider
                 .when("/", {
                     templateUrl: "views/mainView.html",
@@ -14,6 +15,7 @@
                     templateUrl: "views/testView.html"
                 })
                 .otherwise("/");
-        }]);
+        }
+    ]);
 
 })();

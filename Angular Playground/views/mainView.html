@@ -17,10 +17,9 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="list-group">
-                        <a class="list-group-item" 
+                        <a class="list-group-item"
                            ng-repeat="post in vm.posts | filter:searchText"
-                           ng-click="vm.getSelectedData(post)"
-                           onclick="toggleBasedOnMobile(this, true);">
+                           ng-click="vm.getSelectedData(post)">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <i class="fa fa-4x fa-quote-left pull-left"></i>

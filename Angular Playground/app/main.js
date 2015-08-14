@@ -1,55 +1,58 @@
-﻿(function () {
-    'use strict';
-    
-    angular
-        .module('app')
-        .controller('Main',["$http",
-                     MainCtrl]);
+﻿(function() {
+    "use strict";
 
-        function MainCtrl ($http) {
-            var vm = this;
-            vm.posts = [];
-            vm.selectedPost = {};
-            vm.newPost = {};
-            vm.searchText = "";
-            vm.editButtonState = "disabled";
+    function mainCtrl($http) {
+        var self = this;
 
-            //Get the data when a post is clicked
-            vm.getSelectedData = function (post) {
-                vm.selectedPost = post;
-            }
+        self.posts = [];
+        self.selectedPost = {};
+        self.newPost = {};
+        self.searchText = "";
+        self.editButtonState = "disabled";
 
-            //Update the data...
-            vm.updateOrInsertPost = function (isNew) {
-                var post = isNew ? vm.newPost : vm.selectedPost;
-
-                $http.post('http://jsonplaceholder.typicode.com/posts', post).
-                    success(function (data, status, headers, config) {
-                        alert("Post updated...");
-
-                        //The post is a mock so nothing will update on the server.
-                        vm.refresh();
-                    }).
-                    error(function (data, status, headers, config) {
-                        // log error
-                        alert("Post had an issue...");
-                    });
-            }
-
-            //Get the data on load and then set the posts object
-            vm.refresh = function () {
-                $http.get('http://jsonplaceholder.typicode.com/posts').
-                    success(function (data, status, headers, config) {
-                        vm.posts = data;
-                        vm.selectedPost = {};
-                        vm.newPost = {};
-                        vm.editButtonState = "disabled";
-                    }).
-                    error(function (data, status, headers, config) {
-                        // log error
-                    });
-            };
-
-            vm.refresh();
+        //Get the data when a post is clicked
+        self.getSelectedData = function(post) {
+            self.selectedPost = post;
         };
+
+        //Update the data...
+        self.updateOrInsertPost = function(isNew) {
+            var post = isNew ? self.newPost : self.selectedPost;
+
+            $http.post("http://jsonplaceholder.typicode.com/posts", post).
+                success(function(data, status, headers, config) {
+                    alert("Post updated...");
+
+                    //The post is a mock so nothing will update on the server.
+                    self.refresh();
+                }).
+                error(function(data, status, headers, config) {
+                    // log error
+                    alert("Post had an issue...");
+                });
+        };
+
+        //Get the data on load and then set the posts object
+        self.refresh = function() {
+            $http.get("http://jsonplaceholder.typicode.com/posts").
+                success(function(data, status, headers, config) {
+                    self.posts = data;
+                    self.selectedPost = {};
+                    self.newPost = {};
+                    self.editButtonState = "disabled";
+                }).
+                error(function(data, status, headers, config) {
+                    // log error
+                });
+        };
+
+        self.refresh();
+    }
+
+    angular
+        .module("app")
+        .controller("Main", [
+            "$http",
+            mainCtrl
+        ]);;
 })();
